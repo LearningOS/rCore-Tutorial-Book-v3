@@ -4,11 +4,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="操作系统抽象" href="3os-hw-abstract.html" /><link rel="prev" title="什么是操作系统" href="1what-is-os.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.31"/>
+    <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
         <title>操作系统的系统调用接口 - rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=c7c65a82b42f6b978e58466c1e9ef2509836d916" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     <link rel="stylesheet" type="text/css" href="../_static/my_style.css" />
     
     
@@ -20,38 +20,38 @@
   --color-code-foreground: black;
   
   }
-  body[data-theme="dark"] {
-    --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
-  
-  }
-  @media (prefers-color-scheme: dark) {
-    body:not([data-theme="light"]) {
+  @media not print {
+    body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
   
     }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
   }
 </style></head>
   <body>
+    
     <script>
       document.body.dataset.theme = localStorage.getItem("theme") || "auto";
     </script>
     
+
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" />
-      <line x1="4" y1="6" x2="20" y2="6" />
-      <line x1="10" y1="12" x2="20" y2="12" />
-      <line x1="6" y1="18" x2="20" y2="18" />
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
     </svg>
   </symbol>
   <symbol id="svg-menu" viewBox="0 0 24 24">
     <title>Menu</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -60,14 +60,14 @@
   </symbol>
   <symbol id="svg-arrow-right" viewBox="0 0 24 24">
     <title>Expand</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
       <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   </symbol>
   <symbol id="svg-sun" viewBox="0 0 24 24">
     <title>Light mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -82,7 +82,7 @@
   </symbol>
   <symbol id="svg-moon" viewBox="0 0 24 24">
     <title>Dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
@@ -90,7 +90,7 @@
   </symbol>
   <symbol id="svg-sun-half" viewBox="0 0 24 24">
     <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <circle cx="12" cy="12" r="9" />
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -357,13 +357,20 @@
 
 </div>
 </div>
+
       </div>
       
     </div>
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -373,15 +380,18 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <div class="section" id="id1">
-<h1>操作系统的系统调用接口<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+        <article role="main">
+          <div class="section" id="id1">
+<h1>操作系统的系统调用接口<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<div class="section" id="apiabi">
+<h2>API与ABI<a class="headerlink" href="#apiabi" title="永久链接至标题">#</a></h2>
 <p>站在使用操作系统的角度会比较容易对操作系统的功能产生初步的认识。操作系统内核是一个需要提供各种服务的软件，其服务对象是应用程序，而用户（这里可以理解为一般使用计算机的人）是通过应用程序的服务间接获得操作系统的服务的，因此操作系统内核藏在一般用户看不到的地方。但应用程序需要访问操作系统获得操作系统的服务，这就需要通过操作系统的接口才能完成。操作系统的接口形式就是上一节提到的应用程序二进制接口 (ABI, Application Binary Interface)。</p>
 <p>操作系统不能只提供面向单一编程语言的函数库的编程接口 (API, Application Programming Interface) ，它的接口需要考虑对基于各种编程语言的应用支持，以及访问安全等因素，使得应用软件不能像访问函数库一样的直接访问操作系统内部函数，更不能直接读写操作系统内部的地址空间。为此，操作系统设计了一套安全可靠的接口，我们称为系统调用接口 (System Call Interface)。系统调用接口通常面向应用程序提供了API的描述，但在具体实现上，还需要提供ABI的接口描述规范。</p>
 <p>在现代处理器的安全支持（特权级隔离，内存空间隔离等）下，应用程序就不能直接以函数调用的方式访问操作系统的函数，以及直接读写操作系统的数据变量。不同类型的应用程序可以通过符合操作系统规定的ABI规范的系统调用接口，发出系统调用请求，来获得操作系统的服务。操作系统提供完服务后，返回应用程序继续执行。</p>
@@ -391,17 +401,19 @@
 <p>应用程序二进制接口 ABI 是不同二进制代码片段的连接纽带。ABI 定义了二进制机器代码级别的规则，主要包括基本数据类型、通用寄存器的使用、参数的传递规则、以及堆栈的使用等等。ABI 与处理器和内存地址等硬件架构相关，是用来约束链接器 (Linker) 和汇编器 (Assembler) 的。在同一处理器下，基于不同高级语言编写的应用程序、库和操作系统，如果遵循同样的 ABI 定义，那么它们就能正确链接和执行。</p>
 <p>应用程序编程接口 API 是不同源代码片段的连接纽带。API 定义了一个源码级（如 C 语言）函数的参数，参数的类型，函数的返回值等。因此 API 是用来约束编译器 (Compiler) 的：一个 API 是给编译器的一些指令，它规定了源代码可以做以及不可以做哪些事。API 与编程语言相关，如 libc 是基于 C 语言编写的标准库，那么基于 C 的应用程序就可以通过编译器建立与 libc 的联系，并能在运行中正确访问 libc 中的函数。</p>
 </div>
-<p>对于实际操作系统而言，有多少操作系统，就有多少种不同类型的系统调用接口。通用服务器为支持各种应用，需要有相对多的系统调用服务接口，比如目前 Linux 有超过三百个的系统调用接口。
-那么这些系统调用接口为应用程序提供了哪些功能呢？下面是一些值得了解的功能列表：</p>
+</div>
+<div class="section" id="id2">
+<h2>系统调用接口与功能<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>对于通用的应用程序，一般需要关注如下问题，并希望得到操作系统的支持：</p>
 <ul class="simple">
-<li><p>一个运行的程序可以创建另一个程序的实例吗？需要等待另外一个程序执行完成吗？操作系统能停止或恢复另一个正在运行的程序吗？</p></li>
-<li><p>一个运行的程序如何与连接到计算机的设备通信并通过它们与物理世界通信？</p></li>
-<li><p>多个运行的程序如何同步互斥地对共享资源进行访问？</p></li>
+<li><p>一个运行的程序如何能输出字符信息？如何能获得输入字符信息？</p></li>
 <li><p>一个运行的程序可以要求更多（或更少）的内存空间吗？</p></li>
 <li><p>一个运行的程序如何持久地存储用户数据？</p></li>
-<li><p>一个运行的程序如何能输出字符信息？如何能获得输入字符信息？</p></li>
+<li><p>一个运行的程序如何与连接到计算机的设备通信并通过它们与物理世界通信？</p></li>
+<li><p>多个运行的程序如何同步互斥地对共享资源进行访问？</p></li>
+<li><p>一个运行的程序可以创建另一个程序的实例吗？需要等待另外一个程序执行完成吗？一个运行的程序能暂停或恢复另一个正在运行的程序吗？</p></li>
 </ul>
-<p>下面列出了一些相对比较重要的操作系统接口或抽象：</p>
+<p>操作系统主要通过基于ABI的系统调用接口来给应用程序提供上述服务，以支持应用程序的各种需求。对于实际操作系统而言，有多少操作系统，就有多少种不同类型的系统调用接口。通用服务器为支持各种应用的服务需求，需要有相对多的系统调用服务接口，比如目前 Linux 有超过三百个的系统调用接口。下面列出了一些相对比较重要的操作系统接口或抽象，以及它们的大致功能：</p>
 <ul class="simple">
 <li><p>进程（即程序运行过程）管理：复制创建进程 fork 、退出进程 exit 、执行进程 exec 等。</p></li>
 <li><p>线程管理：线程（即程序的一个执行流）的创建、执行、调度切换等。</p></li>
@@ -409,22 +421,193 @@
 <li><p>进程间通信：管道 pipe 、信号 signal 、事件 event 等。</p></li>
 <li><p>虚存管理：内存空间映射 mmap 、改变数据段地址空间大小 sbrk 、共享内存 shm 等。</p></li>
 <li><p>文件I/O操作：对存储设备中的文件进行读 read 、写 write 、打开 open 、关闭 close 等操作。</p></li>
-<li><p>外设I/O操作：外设包括键盘、显示器、串口、磁盘、时钟 … 但接口均采用了文件 I/O 操作的通用系统调用接口。</p></li>
+<li><p>外设I/O操作：外设包括键盘、显示器、串口、磁盘、时钟 … ，主要采用文件 I/O 操作接口。</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>上述表述在某种程度上说明了操作系统对计算机硬件重要组成的抽象和虚拟化，使得应用程序只需基于对简单的抽象概念的访问来到达对计算机系统资源的使用：</p>
+<p>上述表述在某种程度上说明了操作系统对计算机硬件重要组成的抽象和虚拟化，这样会有助于应用程序开发。应用程序员只需访问统一的抽象概念（如文件、进程等），就可以使用各种复杂的计算机物理资源（处理器、内存、外设等）：</p>
 <ul class="simple">
 <li><p>文件 (File) 是外设的一种抽象和虚拟化。特别对于存储外设而言，文件是持久存储的抽象。</p></li>
 <li><p>地址空间 (Address Space) 是对内存的抽象和虚拟化。</p></li>
 <li><p>进程 (Process) 是对计算机资源的抽象和虚拟化。而其中最核心的部分是对CPU的抽象与虚拟化。</p></li>
 </ul>
 </div>
-<img alt="../_images/run-app.png" class="align-center" id="run-app" src="../_images/run-app.png"/>
-<p>有了这些系统调用接口，简单的应用程序就不用考虑底层硬件细节，可以在操作系统的服务支持和管理下简洁地完成其应用功能了。在现阶段，也许大家对进程、文件、地址空间等抽象概念还不了解，在接下来的章节会对这些概念有进一步的介绍。值得注意的是，我们设计的最终操作系统可以只用二十几个系统调用功能接口，就可以支持应用需要的上述功能。而且这些调用与最初的 UNIX 的系统调用接口类似，几乎没有变化。尽管UNIX 的系统调用最早是在 1970 年左右设计和实现的，但这些调用中的大多数仍然在今天的系统中广泛使用。</p>
+<img alt="../_images/run-app.png" class="align-center" id="run-app" src="../_images/run-app.png" />
+<p>有了这些系统调用接口，简单的应用程序就不用考虑底层硬件细节，可以在操作系统的服务支持和管理下简洁地完成其应用功能了。在现阶段，也许大家对进程、文件、地址空间等抽象概念还不了解，在接下来的章节会对这些概念有进一步的介绍。值得注意的是，我们设计的各种操作系统总共只用到三十个左右系统调用功能接口（如下表所示），就可以支持应用需要的上述功能。而且这些调用与最初的 UNIX 的系统调用接口类似，几乎没有变化。尽管UNIX 的系统调用最早是在 1970 年左右设计和实现的，但这些调用中的大多数仍然在今天的系统中广泛使用。</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 28%" />
+<col style="width: 14%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>编号</p></th>
+<th class="head"><p>系统调用</p></th>
+<th class="head"><p>所在章节</p></th>
+<th class="head"><p>功能描述</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>exit</p></td>
+<td><p>2</p></td>
+<td><p>结束执行</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>write</p></td>
+<td><p>2/6</p></td>
+<td><p>(2)输出字符串/(6)写文件</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>yield</p></td>
+<td><p>3</p></td>
+<td><p>暂时放弃执行</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>get_time</p></td>
+<td><p>3</p></td>
+<td><p>获取当前时间</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>getpid</p></td>
+<td><p>5</p></td>
+<td><p>获取进程id</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>fork</p></td>
+<td><p>5</p></td>
+<td><p>创建子进程</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>exec</p></td>
+<td><p>5</p></td>
+<td><p>执行新程序</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>waitpid</p></td>
+<td><p>5</p></td>
+<td><p>等待子进程结束</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>read</p></td>
+<td><p>5/6</p></td>
+<td><p>(5)读取字符串/(6)读文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>open</p></td>
+<td><p>6</p></td>
+<td><p>打开/创建文件</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>close</p></td>
+<td><p>6</p></td>
+<td><p>关闭文件</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>dup</p></td>
+<td><p>7</p></td>
+<td><p>复制文件描述符</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>pipe</p></td>
+<td><p>7</p></td>
+<td><p>创建管道</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>kill</p></td>
+<td><p>7</p></td>
+<td><p>发送信号给某进程</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>sigaction</p></td>
+<td><p>7</p></td>
+<td><p>设立信号处理例程</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>sigprocmask</p></td>
+<td><p>7</p></td>
+<td><p>设置要阻止的信号</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>sigreturn</p></td>
+<td><p>7</p></td>
+<td><p>从信号处理例程返回</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>sleep</p></td>
+<td><p>8</p></td>
+<td><p>进程休眠一段时间</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>thread_create</p></td>
+<td><p>8</p></td>
+<td><p>创建线程</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>gettid</p></td>
+<td><p>8</p></td>
+<td><p>获取线程id</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>waittid</p></td>
+<td><p>8</p></td>
+<td><p>等待线程结束</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>mutex_create</p></td>
+<td><p>8</p></td>
+<td><p>创建锁</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>mutex_lock</p></td>
+<td><p>8</p></td>
+<td><p>获取锁</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>mutex_unlock</p></td>
+<td><p>8</p></td>
+<td><p>释放锁</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>semaphore_create</p></td>
+<td><p>8</p></td>
+<td><p>创建信号量</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>semaphore_up</p></td>
+<td><p>8</p></td>
+<td><p>减少信号量的计数</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>semaphore_down</p></td>
+<td><p>8</p></td>
+<td><p>增加信号量的计数</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>condvar_create</p></td>
+<td><p>8</p></td>
+<td><p>创建条件变量</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>condvar_signal</p></td>
+<td><p>8</p></td>
+<td><p>唤醒阻塞在条件变量上的线程</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>condvar_wait</p></td>
+<td><p>8</p></td>
+<td><p>阻塞与此条件变量关联的当前线程</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -449,25 +632,47 @@
               </div>
             </a>
         </div>
-
-        <div class="related-information">
-              Copyright &#169; 2020-2022, Yu Chen, Yifan Wu
-            |
-            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
-              and
-              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
-              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
-            |
-            <a class="muted-link" href="../_sources/chapter0/2os-interface.rst.txt"
-               rel="nofollow">
-              显示源代码
-            </a>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2022, Yu Chen, Yifan Wu
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
         </div>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            目录
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">操作系统的系统调用接口</a><ul>
+<li><a class="reference internal" href="#apiabi">API与ABI</a></li>
+<li><a class="reference internal" href="#id2">系统调用接口与功能</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -476,7 +681,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/main.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
     <script kind="utterances">
 
     var commentsRunWhenDOMLoaded = cb => {
