@@ -412,7 +412,7 @@
 <li><p>接收 <a class="reference external" href="https://classroom.github.com/a/hnoWuKGF">第一个实验练习 setup-env-run-os1 的github classroom在线邀请</a>  ，根据提示一路选择OK即可。</p></li>
 <li><p>完成第二步后，你的第一个实验练习 setup-env-run-os1 的 github repository 会被自动建立好，点击此github repository的链接，就可看到你要完成的第一个实验了。</p></li>
 <li><p>在你的第一个实验练习的网页的中上部可以看到一个醒目的 <cite>code</cite>  绿色按钮，点击后，可以进一步看到  <cite>codespace</cite> 标签和醒目的 <cite>create codesapce on main</cite> 绿色按钮。请点击这个绿色按钮，就可以进入到在线的ubuntu +vscode环境中</p></li>
-<li><p>再按照下面的环境安装提示在vscode的 <cite>console</cite> 中安装配置开发环境：rustc，qemu等工具。注：也可在vscode的 <cite>console</cite> 中执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">codespaces_setenv</span></code> 来自动安装配置开发环境（执行``sudo``需要root权限，仅需要执行一次）。</p></li>
+<li><p>再按照下面的环境安装提示在vscode的 <cite>console</cite> 中安装配置开发环境：rustc，qemu等工具。注：也可在vscode的 <cite>console</cite> 中执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">codespaces_setenv</span></code> 来自动安装配置开发环境（执行 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> 需要root权限，仅需要执行一次）。</p></li>
 <li><p><strong>重要：</strong> 在vscode的 <cite>console</cite> 中执行 <cite>make setupclassroom_testX</cite>  （该命令仅执行一次，X的范围为 1-8）配置githubclassroom 自动评分功能。</p></li>
 <li><p>然后就可以基于在线vscode进行开发、运行、提交等完整的实验过程了。</p></li>
 </ol>
@@ -453,8 +453,7 @@
 </div>
 <div class="section" id="vmwareos">
 <h3>VMware虚拟机方式进行本地OS开发环境配置<a class="headerlink" href="#vmwareos" title="永久链接至标题">#</a></h3>
-<p>如果你打算使用 VMware 安装虚拟机的话，我们已经配置好了一个能直接运行 rCore-Tutorial-v3 的 Ubuntu18.04 镜像，它是一个 <code class="docutils literal notranslate"><span class="pre">vmdk</span></code> 格式的虚拟磁盘文件，只需要在 VMware 中新建一台虚拟机，在设置虚拟磁盘的时候选择它即可。<a class="reference external" href="https://pan.baidu.com/s/1JzKjWivy9GZKK8rc3WMJ0g">百度网盘链接</a> （提取码 x5mf ）或者 <a class="reference external" href="https://cloud.tsinghua.edu.cn/d/a9b7b0a1b4724c3f9c66/">清华云盘链接</a> 。已经创建好用户 oslab ，密码为一个空格。它已经安装了中文输入法和 Markdown 编辑器 Typora 还有作为 Rust 集成开发环境的 Visual Studio Code，能够更容易完成实验并撰写实验报告。如果想要使用 VMWare 安装 openEuler 虚拟机的话，可以在 <a class="reference external" href="https://repo.openeuler.org/openEuler-20.03-LTS-SP2/ISO/">openEuler官网</a> 下载 ISO 自行安装，接着需要参考网络上的一些教程配置网络和安装图形界面。</p>
-<p>注：目前的虚拟机镜像基于ubuntu-18.04和QEMU-5.0，还没更新到ubuntu-20.04和QEMU-7.0</p>
+<p>如果你打算使用 VMware 安装虚拟机的话，我们已经配置好了一个能直接运行 rCore-Tutorial-v3 的 Ubuntu22.04 镜像，它是一个 <code class="docutils literal notranslate"><span class="pre">vmdk</span></code> 格式的虚拟磁盘文件，只需要在 VMware 中新建一台虚拟机，在设置虚拟磁盘的时候选择它即可。<a class="reference external" href="https://pan.baidu.com/s/1yQHtQIXQUbHCbyqSPtuqqQ?pwd=pcxf">百度网盘链接</a> 或者 <a class="reference external" href="https://cloud.tsinghua.edu.cn/d/a9b7b0a1b4724c3f9c66/">清华云盘链接</a> （目前是旧版的 Ubuntu18.04+QEMU5.0的镜像）。已经创建好用户 oslab ，密码为一个空格。它已经安装了中文输入法和作为 Rust 集成开发环境的 Visual Studio Code，能够更容易完成实验并撰写实验报告。如果想要使用 VMWare 安装 openEuler 虚拟机的话，可以在 <a class="reference external" href="https://repo.openeuler.org/openEuler-20.03-LTS-SP2/ISO/">openEuler官网</a> 下载 ISO 自行安装，接着需要参考网络上的一些教程配置网络和安装图形界面。</p>
 </div>
 <div class="section" id="dockeros">
 <span id="link-docker-env"></span><h3>Docker方式进行本地OS开发环境配置<a class="headerlink" href="#dockeros" title="永久链接至标题">#</a></h3>
@@ -464,7 +463,7 @@
 <p>感谢 qobilidop，dinghao188 和张汉东老师帮忙配置好的 Docker 开发环境，进入 Docker 开发环境之后不需要任何软件工具链的安装和配置，可以直接将 tutorial 运行起来，目前应该仅支持将 tutorial 运行在 QEMU 模拟器上。</p>
 <p>使用方法如下（以 Ubuntu18.04 为例）：</p>
 <ol class="arabic simple">
-<li><p>通过 <code class="docutils literal notranslate"><span class="pre">su</span></code> 切换到管理员账户 <code class="docutils literal notranslate"><span class="pre">root</span></code> , 在 <code class="docutils literal notranslate"><span class="pre">rCore-Tutorial-v3</span></code> 根目录下，执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build_docker</span></code> ，来建立基于docker的开发环境 ；</p></li>
+<li><p>通过 <code class="docutils literal notranslate"><span class="pre">su</span></code> 切换到管理员账户 <code class="docutils literal notranslate"><span class="pre">root</span></code> （注：如果此前并未设置 <code class="docutils literal notranslate"><span class="pre">root</span></code> 账户的密码需要先通过 <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">passwd</span></code> 进行设置）, 在 <code class="docutils literal notranslate"><span class="pre">rCore-Tutorial-v3</span></code> 根目录下，执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">build_docker</span></code> ，来建立基于docker的开发环境 ；</p></li>
 <li><p>在 <code class="docutils literal notranslate"><span class="pre">rCore-Tutorial-v3</span></code> 根目录下，执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docker</span></code> 进入到 Docker 环境；</p></li>
 <li><p>进入 Docker 之后，会发现当前处于根目录 <code class="docutils literal notranslate"><span class="pre">/</span></code> ，我们通过 <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">mnt</span></code> 将当前工作路径切换到 <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> 目录；</p></li>
 <li><p>通过 <code class="docutils literal notranslate"><span class="pre">ls</span></code> 可以发现 <code class="docutils literal notranslate"><span class="pre">/mnt</span></code> 目录下的内容和 <code class="docutils literal notranslate"><span class="pre">rCore-Tutorial-v3</span></code> 目录下的内容完全相同，接下来就可以在这个环境下运行 tutorial 了。例如 <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">os</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">run</span></code> 。</p></li>
@@ -657,20 +656,20 @@ sudo apt install python3-serial
 <h3>在 QEMU 模拟器上运行<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h3>
 <p>如果是在 QEMU 模拟器上运行，只需在 <code class="docutils literal notranslate"><span class="pre">os</span></code> 目录下 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> 即可。在内核加载完毕之后，可以看到目前可以用的
 应用程序。 <code class="docutils literal notranslate"><span class="pre">usertests</span></code> 打包了其中的很大一部分，所以我们可以运行它，只需输入在终端中输入它的名字即可。</p>
-<img alt="../_images/qemu-final.gif" src="../_images/qemu-final.gif" />
+<img alt="../_images/qemu-final.png" src="../_images/qemu-final.png" />
 <p>之后，可以先按下 <code class="docutils literal notranslate"><span class="pre">Ctrl+a</span></code> （即：先按下 Ctrl 不松开，再按下小写字母 a 不放，随后同时将两个键松开） ，再按下 <code class="docutils literal notranslate"><span class="pre">x</span></code> 来退出 QEMU。</p>
 </div>
 <div class="section" id="id13">
 <h3>在 K210 平台上运行<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h3>
 <p>如果是在 K210 平台上运行则略显复杂。</p>
 <p>首先，我们需要将 MicroSD 插入 PC 来将文件系统镜像拷贝上去。</p>
-<img alt="../_images/prepare-sd.gif" src="../_images/prepare-sd.gif" />
+<img alt="../_images/prepare-sd.png" src="../_images/prepare-sd.png" />
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>在 <code class="docutils literal notranslate"><span class="pre">os/Makefile</span></code> 中我们默认设置 MicroSD 在当前操作系统中可以用设备 <code class="docutils literal notranslate"><span class="pre">SDCARD=/dev/sdb</span></code> 访问。你可以使用 <code class="docutils literal notranslate"><span class="pre">df</span> <span class="pre">-hT</span></code> 命令来确认在你的环境中 MicroSD 是哪个设备，并在 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">sdcard</span></code> 之前对 <code class="docutils literal notranslate"><span class="pre">os/Makefile</span></code> 的 <code class="docutils literal notranslate"><span class="pre">SDCARD</span></code> 配置做出适当的修改。不然，这有可能导致 <strong>设备 /dev/sdb 上数据丢失</strong> ！</p>
 </div>
 <p>随后，我们将 MicroSD 插入 K210 开发板，将 K210 开发板连接到 PC ，然后进入 <code class="docutils literal notranslate"><span class="pre">os</span></code> 目录 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span> <span class="pre">BOARD=k210</span></code> 在 K210 开发板上跑 rCore Tutorial 。</p>
-<img alt="../_images/k210-final.gif" src="../_images/k210-final.gif" />
+<img alt="../_images/k210-final.png" src="../_images/k210-final.png" />
 <p>之后，可以按下 <code class="docutils literal notranslate"><span class="pre">Ctrl+]</span></code> 来退出串口终端。</p>
 <p>由于教程的 ch1~ch5 分支还没有文件系统，在 K210 上运行这些分支无需 MicroSD 卡也不需要进行文件系统镜像烧写工作，直接切换到 <cite>os</cite> 目录下 <cite>make run BOARD=k210</cite> 即可。</p>
 <p>到这里，恭喜你完成了实验环境的配置，可以开始阅读教程的正文部分了！</p>

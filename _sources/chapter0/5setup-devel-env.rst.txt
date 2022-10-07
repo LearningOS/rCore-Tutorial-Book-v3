@@ -31,7 +31,7 @@ Github Classroom方式进行在线OS 环境配置
    2. 接收 `第一个实验练习 setup-env-run-os1 的github classroom在线邀请 <https://classroom.github.com/a/hnoWuKGF>`_  ，根据提示一路选择OK即可。
    3. 完成第二步后，你的第一个实验练习 setup-env-run-os1 的 github repository 会被自动建立好，点击此github repository的链接，就可看到你要完成的第一个实验了。
    4. 在你的第一个实验练习的网页的中上部可以看到一个醒目的 `code`  绿色按钮，点击后，可以进一步看到  `codespace` 标签和醒目的 `create codesapce on main` 绿色按钮。请点击这个绿色按钮，就可以进入到在线的ubuntu +vscode环境中
-   5. 再按照下面的环境安装提示在vscode的 `console` 中安装配置开发环境：rustc，qemu等工具。注：也可在vscode的 `console` 中执行 ``make codespaces_setenv`` 来自动安装配置开发环境（执行``sudo``需要root权限，仅需要执行一次）。
+   5. 再按照下面的环境安装提示在vscode的 `console` 中安装配置开发环境：rustc，qemu等工具。注：也可在vscode的 `console` 中执行 ``make codespaces_setenv`` 来自动安装配置开发环境（执行 ``sudo`` 需要root权限，仅需要执行一次）。
    6. **重要：** 在vscode的 `console` 中执行 `make setupclassroom_testX`  （该命令仅执行一次，X的范围为 1-8）配置githubclassroom 自动评分功能。
    7. 然后就可以基于在线vscode进行开发、运行、提交等完整的实验过程了。
 
@@ -76,9 +76,7 @@ Windows的WSL2方式建立Linux环境
 VMware虚拟机方式进行本地OS开发环境配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-如果你打算使用 VMware 安装虚拟机的话，我们已经配置好了一个能直接运行 rCore-Tutorial-v3 的 Ubuntu18.04 镜像，它是一个 ``vmdk`` 格式的虚拟磁盘文件，只需要在 VMware 中新建一台虚拟机，在设置虚拟磁盘的时候选择它即可。`百度网盘链接 <https://pan.baidu.com/s/1JzKjWivy9GZKK8rc3WMJ0g>`_ （提取码 x5mf ）或者 `清华云盘链接 <https://cloud.tsinghua.edu.cn/d/a9b7b0a1b4724c3f9c66/>`_ 。已经创建好用户 oslab ，密码为一个空格。它已经安装了中文输入法和 Markdown 编辑器 Typora 还有作为 Rust 集成开发环境的 Visual Studio Code，能够更容易完成实验并撰写实验报告。如果想要使用 VMWare 安装 openEuler 虚拟机的话，可以在 `openEuler官网 <https://repo.openeuler.org/openEuler-20.03-LTS-SP2/ISO/>`_ 下载 ISO 自行安装，接着需要参考网络上的一些教程配置网络和安装图形界面。
-
-注：目前的虚拟机镜像基于ubuntu-18.04和QEMU-5.0，还没更新到ubuntu-20.04和QEMU-7.0
+如果你打算使用 VMware 安装虚拟机的话，我们已经配置好了一个能直接运行 rCore-Tutorial-v3 的 Ubuntu22.04 镜像，它是一个 ``vmdk`` 格式的虚拟磁盘文件，只需要在 VMware 中新建一台虚拟机，在设置虚拟磁盘的时候选择它即可。`百度网盘链接 <https://pan.baidu.com/s/1yQHtQIXQUbHCbyqSPtuqqQ?pwd=pcxf>`_ 或者 `清华云盘链接 <https://cloud.tsinghua.edu.cn/d/a9b7b0a1b4724c3f9c66/>`_ （目前是旧版的 Ubuntu18.04+QEMU5.0的镜像）。已经创建好用户 oslab ，密码为一个空格。它已经安装了中文输入法和作为 Rust 集成开发环境的 Visual Studio Code，能够更容易完成实验并撰写实验报告。如果想要使用 VMWare 安装 openEuler 虚拟机的话，可以在 `openEuler官网 <https://repo.openeuler.org/openEuler-20.03-LTS-SP2/ISO/>`_ 下载 ISO 自行安装，接着需要参考网络上的一些教程配置网络和安装图形界面。
 
 .. _link-docker-env:
 
@@ -93,7 +91,7 @@ Docker方式进行本地OS开发环境配置
    
    使用方法如下（以 Ubuntu18.04 为例）：
 
-   1. 通过 ``su`` 切换到管理员账户 ``root`` , 在 ``rCore-Tutorial-v3`` 根目录下，执行 ``make build_docker`` ，来建立基于docker的开发环境 ；
+   1. 通过 ``su`` 切换到管理员账户 ``root`` （注：如果此前并未设置 ``root`` 账户的密码需要先通过 ``sudo passwd`` 进行设置）, 在 ``rCore-Tutorial-v3`` 根目录下，执行 ``make build_docker`` ，来建立基于docker的开发环境 ；
    2. 在 ``rCore-Tutorial-v3`` 根目录下，执行 ``make docker`` 进入到 Docker 环境；
    3. 进入 Docker 之后，会发现当前处于根目录 ``/`` ，我们通过 ``cd mnt`` 将当前工作路径切换到 ``/mnt`` 目录；
    4. 通过 ``ls`` 可以发现 ``/mnt`` 目录下的内容和 ``rCore-Tutorial-v3`` 目录下的内容完全相同，接下来就可以在这个环境下运行 tutorial 了。例如 ``cd os && make run`` 。    
@@ -338,7 +336,7 @@ GDB 调试支持
 如果是在 QEMU 模拟器上运行，只需在 ``os`` 目录下 ``make run`` 即可。在内核加载完毕之后，可以看到目前可以用的
 应用程序。 ``usertests`` 打包了其中的很大一部分，所以我们可以运行它，只需输入在终端中输入它的名字即可。
 
-.. image:: qemu-final.gif
+.. image:: qemu-final.png
 
 之后，可以先按下 ``Ctrl+a`` （即：先按下 Ctrl 不松开，再按下小写字母 a 不放，随后同时将两个键松开） ，再按下 ``x`` 来退出 QEMU。
 
@@ -349,7 +347,7 @@ GDB 调试支持
 
 首先，我们需要将 MicroSD 插入 PC 来将文件系统镜像拷贝上去。
 
-.. image:: prepare-sd.gif
+.. image:: prepare-sd.png
 
 .. warning::
 
@@ -357,7 +355,7 @@ GDB 调试支持
    
 随后，我们将 MicroSD 插入 K210 开发板，将 K210 开发板连接到 PC ，然后进入 ``os`` 目录 ``make run BOARD=k210`` 在 K210 开发板上跑 rCore Tutorial 。 
 
-.. image:: k210-final.gif
+.. image:: k210-final.png
 
 之后，可以按下 ``Ctrl+]`` 来退出串口终端。
 
