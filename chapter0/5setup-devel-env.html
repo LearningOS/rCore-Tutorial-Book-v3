@@ -2,7 +2,7 @@
 <html class="no-js" lang="zh_CN">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="K210 开发板相关问题" href="6hardware.html" /><link rel="prev" title="操作系统的特征" href="4os-features.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="索引" href="../genindex.html" /><link rel="search" title="搜索" href="../search.html" /><link rel="next" title="练习" href="7exercise.html" /><link rel="prev" title="操作系统的特征" href="4os-features.html" />
 
     <meta name="generator" content="sphinx-4.3.2, furo 2022.06.21"/>
         <title>实验环境配置 - rCore-Tutorial-Book-v3 3.6.0-alpha.1 文档</title>
@@ -157,7 +157,7 @@
   <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">第零章：操作系统概述</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="0intro.html">为何要写这本操作系统书</a></li>
+<li class="toctree-l2"><a class="reference internal" href="0intro.html">引言</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="1what-is-os.html">什么是操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -173,7 +173,6 @@
 <li class="toctree-l2 current has-children current-page"><a class="current reference internal" href="#">实验环境配置</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="6hardware.html">K210 开发板相关问题</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/2remove-std.html">移除标准库依赖</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（原理篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（基础篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/4first-instruction-in-kernel2.html">内核第一条指令（实践篇）</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -405,18 +404,18 @@
 <p>注：这种方式目前主要用于 <a class="reference external" href="https://learningos.github.io/rust-based-os-comp2022/">2022年开源操作系统训练营</a></p>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p><strong>基于github classroom的在线开发方式</strong></p>
-<p>基于github classroom，可方便建立开发用的git repository，并可基于github的 codespace （在线版ubuntu +vscode）在线开发使用。整个开发环境仅仅需要一个网络浏览器。</p>
+<p><strong>基于 github classroom 的在线开发方式</strong></p>
+<p>基于 github classroom，可方便建立开发用的 git repository，并可基于 github 的 codespace （在线版 ubuntu +vscode）在线开发使用。整个开发环境仅仅需要一个网络浏览器。</p>
 <ol class="arabic simple">
 <li><p>在网络浏览器中用自己的 github  id 登录 github.com</p></li>
 <li><p>接收 <a class="reference external" href="https://classroom.github.com/a/hnoWuKGF">第一个实验练习 setup-env-run-os1 的github classroom在线邀请</a>  ，根据提示一路选择OK即可。</p></li>
-<li><p>完成第二步后，你的第一个实验练习 setup-env-run-os1 的 github repository 会被自动建立好，点击此github repository的链接，就可看到你要完成的第一个实验了。</p></li>
+<li><p>完成第二步后，你的第一个实验练习 setup-env-run-os1 的 github repository 会被自动建立好，点击此 github repository 的链接，就可看到你要完成的第一个实验了。</p></li>
 <li><p>在你的第一个实验练习的网页的中上部可以看到一个醒目的 <cite>code</cite>  绿色按钮，点击后，可以进一步看到  <cite>codespace</cite> 标签和醒目的 <cite>create codesapce on main</cite> 绿色按钮。请点击这个绿色按钮，就可以进入到在线的ubuntu +vscode环境中</p></li>
-<li><p>再按照下面的环境安装提示在vscode的 <cite>console</cite> 中安装配置开发环境：rustc，qemu等工具。注：也可在vscode的 <cite>console</cite> 中执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">codespaces_setenv</span></code> 来自动安装配置开发环境（执行 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> 需要root权限，仅需要执行一次）。</p></li>
-<li><p><strong>重要：</strong> 在vscode的 <cite>console</cite> 中执行 <cite>make setupclassroom_testX</cite>  （该命令仅执行一次，X的范围为 1-8）配置githubclassroom 自动评分功能。</p></li>
-<li><p>然后就可以基于在线vscode进行开发、运行、提交等完整的实验过程了。</p></li>
+<li><p>再按照下面的环境安装提示在 vscode 的 <cite>console</cite> 中安装配置开发环境：rustc，qemu 等工具。注：也可在 vscode 的 <cite>console</cite> 中执行 <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">codespaces_setenv</span></code> 来自动安装配置开发环境（执行 <code class="docutils literal notranslate"><span class="pre">sudo</span></code> 需要root权限，仅需要执行一次）。</p></li>
+<li><p><strong>重要：</strong> 在 vscode 的 <cite>console</cite> 中执行 <cite>make setupclassroom_testX</cite>  （该命令仅执行一次，X的范围为 1-8）配置 github classroom 自动评分功能。</p></li>
+<li><p>然后就可以基于在线 vscode 进行开发、运行、提交等完整的实验过程了。</p></li>
 </ol>
-<p>上述的3，4，5步不是必须的，你也可以仅仅基于 <code class="docutils literal notranslate"><span class="pre">Github</span> <span class="pre">Classromm</span></code> 生成git repository，并进行本地开发。</p>
+<p>上述的3，4，5步不是必须的，你也可以仅仅基于 <code class="docutils literal notranslate"><span class="pre">Github</span> <span class="pre">Classroom</span></code> 生成 git repository，并进行本地开发。</p>
 </div>
 </div>
 </div>
@@ -557,7 +556,7 @@ rustup default nightly
 </div>
 <p>接下来安装一些Rust相关的软件包</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rustup target add riscv64gc-unknown-none-elf
-cargo install cargo-binutils --vers <span class="o">=</span><span class="m">0</span>.3.3
+cargo install cargo-binutils
 rustup component add llvm-tools-preview
 rustup component add rust-src
 </pre></div>
@@ -620,6 +619,11 @@ qemu-riscv64 --version
 </pre></div>
 </div>
 <p>在其他缺少预编译 QEMU with RV64 软件包的Linux x86-64 环境（如openEuler操作系统）上，首先需要从 openEuler 社区维护的 QEMU 的 <a class="reference external" href="https://gitee.com/src-openeuler/qemu/tree/riscv/">riscv分支</a> 下载 QEMU 源码，并直接通过 rpmbuild 进行构建。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>请尽量不要安装 <code class="docutils literal notranslate"><span class="pre">qemu-kvm</span></code> ，这可能会导致我们的框架无法正常运行。如果已经安装，可以考虑换用 Docker 。</p>
+<p>另外，我们仅在 Qemu 7.0.0 版本上进行了测试，请尽量不要切换到其他版本。</p>
+</div>
 </div>
 <div class="section" id="k210">
 <h4>K210 真机串口通信<a class="headerlink" href="#k210" title="永久链接至标题">#</a></h4>
@@ -717,12 +721,12 @@ sudo apt install python3-serial
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="6hardware.html">
+          <a class="next-page" href="7exercise.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">K210 开发板相关问题</div>
+                <div class="title">练习</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>

@@ -157,7 +157,7 @@
   <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">为何要写这本操作系统书</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">引言</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/1what-is-os.html">什么是操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -173,7 +173,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/5setup-devel-env.html">实验环境配置</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/6hardware.html">K210 开发板相关问题</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/2remove-std.html">移除标准库依赖</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（原理篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（基础篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/4first-instruction-in-kernel2.html">内核第一条指令（实践篇）</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -419,30 +418,31 @@
 <li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id4">线程概念</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id5">通用操作系统多线程应用程序示例</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id7">线程模型与重要系统调用</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id8">线程创建系统调用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id9">等待子线程系统调用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id10">进程相关的系统调用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id8">线程的创建</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id9">简单线程管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id10">线程退出及资源回收</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id11">进程相关的系统调用</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id11">应用程序示例</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id12">系统调用封装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#threads">多线程应用程序 – threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id12">应用程序示例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id13">系统调用封装</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id14">多线程应用程序</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id13">线程管理的核心数据结构</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id14">线程控制块</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id15">包含线程的进程控制块</a></li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id16">线程与处理器管理结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id15">线程管理的核心数据结构</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id16">通用资源分配器及线程相关的软硬件资源</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id17">进程和线程控制块</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id18">任务管理器与处理器管理结构</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id17">线程管理机制的设计与实现</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id18">线程创建、线程退出与等待线程结束</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id19">线程创建</a></li>
-<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id20">线程退出</a></li>
-<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id21">等待线程结束</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1thread-kernel.html#id19">线程管理机制的设计与实现</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id20">线程生命周期管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id21">线程创建</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id22">线程退出</a></li>
+<li class="toctree-l4"><a class="reference internal" href="1thread-kernel.html#id23">等待线程结束</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id22">线程执行中的特权级切换和调度切换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1thread-kernel.html#id24">线程执行中的特权级切换和调度切换</a></li>
 </ul>
 </li>
 </ul>

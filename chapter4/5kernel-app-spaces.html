@@ -157,7 +157,7 @@
   <p class="caption" role="heading"><span class="caption-text">Part1 - Just do it!</span></p>
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../chapter0/index.html">第零章：操作系统概述</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">为何要写这本操作系统书</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter0/0intro.html">引言</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/1what-is-os.html">什么是操作系统</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -173,7 +173,6 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/5setup-devel-env.html">实验环境配置</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../chapter0/6hardware.html">K210 开发板相关问题</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter0/7exercise.html">练习</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
@@ -190,7 +189,7 @@
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/2remove-std.html">移除标准库依赖</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（原理篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/3first-instruction-in-kernel1.html">内核第一条指令（基础篇）</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../chapter1/4first-instruction-in-kernel2.html">内核第一条指令（实践篇）</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="simple">
@@ -604,7 +603,7 @@
 <div class="section" id="id6">
 <h2>内核地址空间<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h2>
 <p id="term-isolation">在本章之前，内核和应用代码的访存地址都被视为一个物理地址，并直接访问物理内存，而在分页模式开启之后，CPU先拿到虚存地址，需要通过 MMU 的地址转换变成物理地址，再交给 CPU 的访存单元去访问物理内存。地址空间抽象的重要意义在于 <strong>隔离</strong> (Isolation) ，当内核让应用执行前，内核需要控制 MMU 使用这个应用的多级页表进行地址转换。由于每个应用地址空间在创建的时候也顺带设置好了多级页表，使得只有那些存放了它的代码和数据的物理页帧能够通过该多级页表被映射到，这样它就只能访问自己的代码和数据而无法触及其他应用或内核的内容。</p>
-<p id="term-trampoline">启用分页模式下，内核代码的访存地址也会被视为一个虚拟地址并需要经过 MMU 的地址转换，因此我们也需要为内核对应构造一个地址空间，它除了仍然需要允许内核的各数据段能够被正常访问之后，还需要包含所有应用的内核栈以及一个 <strong>跳板</strong> (Trampoline) 。我们会在本章的最后一节再深入介绍跳板的机制。</p>
+<p id="term-trampoline-first">启用分页模式下，内核代码的访存地址也会被视为一个虚拟地址并需要经过 MMU 的地址转换，因此我们也需要为内核对应构造一个地址空间，它除了仍然需要允许内核的各数据段能够被正常访问之后，还需要包含所有应用的内核栈以及一个 <strong>跳板</strong> (Trampoline) 。我们会在本章的后续部分再深入介绍 <a class="reference internal" href="6multitasking-based-on-as.html#term-trampoline"><span class="std std-ref">跳板的实现</span></a> 。</p>
 <p>下图是软件看到的 64 位地址空间在 SV39 分页模式下实际可能通过 MMU 检查的最高 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> （之前在 <a class="reference internal" href="3sv39-implementation-1.html#high-and-low-256gib"><span class="std std-ref">这里</span></a> 中解释过最高和最低 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> 的问题）：</p>
 <a class="reference internal image-reference" href="../_images/kernel-as-high.png" id="kernel-as-high"><img alt="../_images/kernel-as-high.png" class="align-center" id="kernel-as-high" src="../_images/kernel-as-high.png" style="height: 400px;" /></a>
 <p>可以看到，跳板放在最高的一个虚拟页面中。接下来则是从高到低放置每个应用的内核栈，内核栈的大小由 <code class="docutils literal notranslate"><span class="pre">config</span></code> 子模块的 <code class="docutils literal notranslate"><span class="pre">KERNEL_STACK_SIZE</span></code> 给出。它们的映射方式为 <code class="docutils literal notranslate"><span class="pre">MapPermission</span></code> 中的 rw 两个标志位，意味着这个逻辑段仅允许 CPU 处于内核态访问，且只能读或写。</p>
@@ -728,7 +727,7 @@
 <p>下图展示了应用地址空间的布局：</p>
 <a class="reference internal image-reference" href="../_images/app-as-full.png"><img alt="../_images/app-as-full.png" class="align-center" src="../_images/app-as-full.png" style="height: 400px;" /></a>
 <p>左侧给出了应用地址空间最低 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> 的布局：从 <span class="math notranslate nohighlight">\(\text{0x10000}\)</span> 开始向高地址放置应用内存布局中的各个逻辑段，最后放置带有一个保护页面的用户栈。这些逻辑段都是以 <code class="docutils literal notranslate"><span class="pre">Framed</span></code> 方式映射到物理内存的，从访问方式上来说都加上了 U 标志位代表 CPU 可以在 U 特权级也就是执行应用代码的时候访问它们。右侧则给出了最高的 <span class="math notranslate nohighlight">\(256\text{GiB}\)</span> ，可以看出它只是和内核地址空间一样将跳板放置在最高页，还将 Trap 上下文放置在次高页中。这两个虚拟页面虽然位于应用地址空间，但是它们并不包含 U 标志位，事实上它们在地址空间切换的时候才会发挥作用，请同样参考本章的最后一节。</p>
-<p>在 <code class="docutils literal notranslate"><span class="pre">os/src/build.rs</span></code> 中，我们不再将丢弃了所有符号的应用二进制镜像链接进内核，因为在应用二进制镜像中，内存布局中各个逻辑段的置和访问限制等信息都被裁剪掉了。我们直接使用保存了逻辑段信息的 ELF 格式的应用可执行文件。这样 <code class="docutils literal notranslate"><span class="pre">loader</span></code> 子模块的设计实现也变得精简：</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">os/src/build.rs</span></code> 中，我们不再将丢弃了所有符号的应用二进制镜像链接进内核，因为在应用二进制镜像中，内存布局中各个逻辑段的位置和访问限制等信息都被裁剪掉了。我们直接使用保存了逻辑段信息的 ELF 格式的应用可执行文件。这样 <code class="docutils literal notranslate"><span class="pre">loader</span></code> 子模块的设计实现也变得精简：</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// os/src/loader.rs</span>
 
 <span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">get_num_app</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span><span class="w"></span>

@@ -112,13 +112,6 @@
    $ cd os
    $ make run
 
-将 Maix 系列开发板连接到 PC，并在上面运行本章代码：
-
-.. code-block:: console
-
-   $ cd os
-   $ make run BOARD=k210
-
 如果顺利的话，我们可以看到批处理系统自动加载并运行所有的程序并且正确在程序出错的情况下保护了自身：
 
 .. code-block:: 
@@ -164,6 +157,18 @@
 本章代码树
 -------------------------------------------------
 
+邓式鱼BatchOS操作系统的总体结构如下图所示：
+
+.. image:: ../../os-lectures/lec3/figs/batch-os-detail.png
+   :align: center
+   :scale: 30 %
+   :name: batch-os-detail
+   :alt: BatchOS总体结构
+
+通过上图，大致可以看出Qemu把包含多个app的列表和BatchOS的image镜像加载到内存中，RustSBI（bootloader）完成基本的硬件初始化后，跳转到邓式鱼BatchOS起始位置，邓式鱼BatchOS首先进行正常运行前的初始化工作，即建立栈空间和清零bss段，然后通过 `AppManager` 内核模块从app列表中依次加载各个app到指定的内存中在用户态执行。app在执行过程中，会通过系统调用的方式得到邓式鱼BatchOS提供的OS服务，如输出字符串等。
+
+位于 ``ch2`` 分支上的邓式鱼BatchOS操作系统的源代码如下所示：
+
 .. code-block::
 
    ./os/src
@@ -171,7 +176,6 @@
    Assembly     2 Files    58 Lines
 
    ├── bootloader
-   │   ├── rustsbi-k210.bin
    │   └── rustsbi-qemu.bin
    ├── LICENSE
    ├── os
@@ -184,7 +188,6 @@
    │       ├── entry.asm
    │       ├── lang_items.rs
    │       ├── link_app.S(构建产物，由 os/build.rs 输出)
-   │       ├── linker-k210.ld
    │       ├── linker-qemu.ld
    │       ├── main.rs(修改：主函数中需要初始化 Trap 处理并加载和执行应用)
    │       ├── sbi.rs
@@ -201,12 +204,6 @@
    │           └── trap.S(包含 Trap 上下文保存与恢复的汇编代码)
    ├── README.md
    ├── rust-toolchain
-   ├── tools
-   │   ├── kflash.py
-   │   ├── LICENSE
-   │   ├── package.json
-   │   ├── README.rst
-   │   └── setup.py
    └── user(新增：应用测例保存在 user 目录下)
       ├── Cargo.toml
       ├── Makefile
